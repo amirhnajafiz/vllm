@@ -23,6 +23,8 @@ from vllm.model_executor.model_loader.weight_utils import (
     gguf_quant_weights_iterator,
 )
 
+import logging
+
 
 class GGUFModelLoader(BaseModelLoader):
     """
@@ -40,6 +42,13 @@ class GGUFModelLoader(BaseModelLoader):
             )
 
     def _prepare_weights(self, model_name_or_path: str):
+        logging.debug(
+            "ctrace"
+            "FSL"
+            "vLLM preparing weights from source %s",
+            model_name_or_path,
+        )
+        
         if os.path.isfile(model_name_or_path):
             return model_name_or_path
         # for raw HTTPS link
